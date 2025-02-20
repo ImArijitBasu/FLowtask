@@ -9,9 +9,7 @@ import { useContext } from "react";
 import { AuthContext } from "./Provider/AuthProvider";
 import PrivateRoute from "./Routes/PrivateRoute";
 import Task from "./Pages/Task";
-// import Home from "./pages/Home";
-// import About from "./pages/About";
-// import NotFound from "./pages/NotFound";
+
 
 const App = () => {
   const { user, googleSignIn, logout } = useContext(AuthContext);
