@@ -121,14 +121,14 @@ const SortableTask = ({ task, containerId, refetchTasks }) => {
         {isEditing ? (
           <button
             onClick={handleEdit}
-            className="px-3 py-1 bg-blue-500 text-white rounded"
+            className="px-3 py-1 bg-blue-900 text-white rounded"
           >
             Save
           </button>
         ) : (
           <button
             onClick={() => setIsEditing(true)}
-            className="px-3 py-1 bg-yellow-500 text-white rounded"
+            className="px-3 py-1 bg-blue-900 text-white rounded"
           >
             Edit
           </button>
@@ -136,7 +136,7 @@ const SortableTask = ({ task, containerId, refetchTasks }) => {
 
         <button
           onClick={handleDelete}
-          className="px-3 py-1 bg-red-500 text-white rounded"
+          className="px-3 py-1 bg-orange-600 text-white rounded"
         >
           Delete
         </button>
