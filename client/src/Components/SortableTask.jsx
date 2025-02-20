@@ -28,10 +28,10 @@ const SortableTask = ({ task, containerId }) => {
       style={style}
       {...attributes}
       {...listeners}
-      className="bg-white p-4 mb-2 rounded-lg shadow-md cursor-grab"
+      className="bg-white touch-none p-4 mb-2 overflow-auto rounded-lg shadow-md cursor-grab"
     >
-      <h3 className="font-semibold">{task.title}</h3>
-      <p>{task.description}</p>
+      <h3 className="font-semibold text-blue-900">{task.title}</h3>
+      <p className="">{task.description}</p>
     </div>
   );
 };

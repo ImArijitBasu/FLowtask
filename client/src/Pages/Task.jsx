@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import TaskForm from "../Components/TaskForm";
-import { closestCorners, DndContext } from "@dnd-kit/core";
-import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
+import { closestCorners, DndContext, KeyboardSensor, PointerSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
+import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { AuthContext } from "../Provider/AuthProvider";
 import SortableColumn from "../Components/SortableColumn";
 
@@ -86,6 +86,13 @@ const Task = () => {
       });
     }
   };
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(TouchSensor),
+    useSensor(KeyboardSensor , {
+      coordinateGetter: sortableKeyboardCoordinates
+    })
+  )
 
   const addDummyTaskIfEmpty = (category) => {
     if (tasks[category].length === 0) {
@@ -99,6 +106,7 @@ const Task = () => {
       <TaskForm />
       <div className="flex container mx-auto my-10 gap-2">
         <DndContext
+        sensors={sensors}
           collisionDetection={closestCorners}
           onDragEnd={handleDragEnd}
         >

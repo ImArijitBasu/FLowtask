@@ -16,7 +16,7 @@ const SortableColumn = ({ id, title, tasks }) => {
               <SortableTask key={task.id} task={task} containerId={id} />
             ))
           ) : (
-            <div className="text-center text-gray-500">No tasks in this column.</div>
+            <div className="text-center text-blue-900">No tasks in this column.</div>
           )}
         </div>
       </SortableContext>

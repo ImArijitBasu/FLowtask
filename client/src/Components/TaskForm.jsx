@@ -46,16 +46,18 @@ const TaskForm = () => {
     <div className="">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col max-w-lg mx-auto space-y-2 border p-2"
+        className="flex flex-col container mx-auto space-y-2 border p-2"
       >
         <input
           type="text"
           placeholder="Task title"
+          maxLength="50"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <textarea
           placeholder="Description"
+          maxLength="200"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
