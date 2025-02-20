@@ -19,7 +19,7 @@ const AuthProvider = ({ children }) => {
       const result = await signInWithPopup(auth, provider);
       const { email, displayName } = result.user;
 
-      const response = await fetch("http://localhost:5000/users", {
+      const response = await fetch("https://flowtask-liart.vercel.app/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

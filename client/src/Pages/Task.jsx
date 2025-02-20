@@ -15,7 +15,7 @@ const Task = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:5000/tasks/${user.email}`)
+      fetch(`https://flowtask-liart.vercel.app/tasks/${user.email}`)
         .then((response) => response.json())
         .then((data) => {
           const tasksByCategory = { todo: [], inProgress: [], done: [] };
@@ -77,7 +77,7 @@ const Task = () => {
       }));
 
       updatedTasks[destinationCategory].forEach((task, index) => {
-        fetch(`http://localhost:5000/tasks/${task.id}`, {
+        fetch(`https://flowtask-liart.vercel.app/tasks/${task.id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -113,10 +113,36 @@ const Task = () => {
     }
     return tasks[category];
   };
-
+  const refetchTasks = () => {
+    if (user?.email) {
+      fetch(`https://flowtask-liart.vercel.app/tasks/${user.email}`)
+        .then((response) => response.json())
+        .then((data) => {
+          const tasksByCategory = { todo: [], inProgress: [], done: [] };
+  
+          data.tasks.forEach((task) => {
+            if (task.category === "todo") {
+              tasksByCategory.todo.push(task);
+            } else if (task.category === "inProgress") {
+              tasksByCategory.inProgress.push(task);
+            } else if (task.category === "done") {
+              tasksByCategory.done.push(task);
+            }
+          });
+  
+          tasksByCategory.todo.sort((a, b) => a.order - b.order);
+          tasksByCategory.inProgress.sort((a, b) => a.order - b.order);
+          tasksByCategory.done.sort((a, b) => a.order - b.order);
+  
+          setTasks(tasksByCategory);
+        })
+        .catch((error) => console.log("Error fetching tasks:", error));
+    }
+  };
+  
   return (
     <div className="flex justify-around flex-col">
-      <TaskForm />
+      <TaskForm refetchTasks={refetchTasks}/>
       <div className="flex container mx-auto my-10 gap-2">
         <DndContext
           sensors={sensors}
@@ -129,7 +155,7 @@ const Task = () => {
             items={addDummyTaskIfEmpty("todo").map((task) => task.id)}
             strategy={verticalListSortingStrategy}
           >
-            <SortableColumn id="todo" title="To-Do" tasks={addDummyTaskIfEmpty("todo")} />
+            <SortableColumn refetchTasks={refetchTasks} id="todo" title="To-Do" tasks={addDummyTaskIfEmpty("todo")} />
           </SortableContext>
 
           {/* In Progress */}
@@ -138,7 +164,7 @@ const Task = () => {
             items={addDummyTaskIfEmpty("inProgress").map((task) => task.id)}
             strategy={verticalListSortingStrategy}
           >
-            <SortableColumn id="inProgress" title="In Progress" tasks={addDummyTaskIfEmpty("inProgress")} />
+            <SortableColumn refetchTasks={refetchTasks} id="inProgress" title="In Progress" tasks={addDummyTaskIfEmpty("inProgress")} />
           </SortableContext>
 
           {/* Done */}
@@ -147,7 +173,7 @@ const Task = () => {
             items={addDummyTaskIfEmpty("done").map((task) => task.id)}
             strategy={verticalListSortingStrategy}
           >
-            <SortableColumn id="done" title="Done" tasks={addDummyTaskIfEmpty("done")} />
+            <SortableColumn refetchTasks={refetchTasks} id="done" title="Done" tasks={addDummyTaskIfEmpty("done")} />
           </SortableContext>
         </DndContext>
       </div>

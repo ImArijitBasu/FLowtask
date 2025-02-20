@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 
-const TaskForm = () => {
+const TaskForm = ({refetchTasks}) => {
   const { user } = useContext(AuthContext);
   console.log(user.email);
   const [title, setTitle] = useState("");
@@ -19,7 +19,7 @@ const TaskForm = () => {
       };
 
       try {
-        const response = await fetch("http://localhost:5000/tasks", {
+        const response = await fetch("https://flowtask-liart.vercel.app/tasks", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -30,6 +30,7 @@ const TaskForm = () => {
         if (response.ok) {
           setTitle("");
           setDescription("");
+          refetchTasks()
         } else {
           alert("Failed to create task!");
         }
