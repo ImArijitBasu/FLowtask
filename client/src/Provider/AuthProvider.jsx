@@ -13,9 +13,26 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const googleSignIn = () => {
+  const googleSignIn = async () => {
     setLoading(true);
-    return signInWithPopup(auth, provider);
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const { email, displayName } = result.user;
+
+      const response = await fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, displayName }),
+      });
+
+      const data = await response.json();
+      console.log("Backend response:", data);
+    } catch (error) {
+      console.error("Error signing in with Google:", error);
+    }
+    setLoading(false);
   };
 
   const logout = () => {

@@ -37,7 +37,7 @@ const App = () => {
         </div>
       </nav>
       <div className="pt-16">
-        <p>{user?.displayName}</p>
+        <p className="text-center">{user?.displayName}</p>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
