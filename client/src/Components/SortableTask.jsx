@@ -111,6 +111,7 @@ const SortableTask = ({ task, containerId, refetchTasks }) => {
           </div>
         ) : (
           <div>
+            <p className="text-xs text-right text-orange-600">{new Date(task.timestamp).toLocaleString()}</p>
             <h3 className="font-semibold text-blue-900 cursor-grab">{task.title}</h3>
             <p>{task.description}</p>
           </div>
