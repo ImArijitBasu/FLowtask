@@ -1,8 +1,8 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# FlowTask - Task Management Application
 
-Currently, two official plugins are available:
+**Description**  
+FlowTask is a task management application that allows users to organize tasks by categories such as "To-Do", "In Progress", and "Done". It includes a drag-and-drop interface for task management and user authentication to store and retrieve tasks.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Live Link  
+- [FlowTask](https://flowtask-arijit.web.app/)
