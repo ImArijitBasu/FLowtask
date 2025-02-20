@@ -46,7 +46,7 @@ const TaskForm = () => {
     <div className="">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col container mx-auto space-y-2 border p-2"
+        className="flex flex-col container mx-auto space-y-2 border p-2 rounded-lg"
       >
         <input
           type="text"
@@ -61,7 +61,7 @@ const TaskForm = () => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-        <button className="btn" type="submit">
+        <button className="btn bg-blue-900 text-white hover:bg-white hover:text-blue-900 transition-all duration-200 ease-in-out" type="submit">
           Add Task
         </button>
       </form>
