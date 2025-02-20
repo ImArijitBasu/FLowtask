@@ -166,7 +166,7 @@ async function run() {
     });
     app.put("/tasks/:taskId", (req, res) => {
       const { taskId } = req.params;
-      const { userEmail, title, description, category } = req.body;
+      const { userEmail, title, description, category ,order } = req.body;
       console.log(req.body, taskId);
       taskCollection
         .updateOne(
@@ -179,6 +179,7 @@ async function run() {
               "tasks.$.title": title,
               "tasks.$.description": description,
               "tasks.$.category": category,
+              "tasks.$.order": order,
             },
           }
         )
